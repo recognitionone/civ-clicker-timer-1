@@ -11,10 +11,6 @@ class MyCounterView {
 		this.startButton.onclick = startHandler;
 	}
 
-	addPauseHandler(pauseHandler) {
-		this.pauseButton.onclick = pauseHandler;
-	}
-
 	addResetHandler(resetHandler) {
 		this.resetButton.onclick = resetHandler;
 	}
@@ -22,5 +18,12 @@ class MyCounterView {
 	setupText(text) {
 		this.demo.innerHTML = text;
 	}
+
+	toggleButtonText(text) {
+		this.startButton.innerHTML = text;
+	}
+
+
+
 
 }
