@@ -1,0 +1,28 @@
+{
+  "name": "civ_clicker_timer_1",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/recognitionone/civ-clicker-timer-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/recognitionone/civ-clicker-timer-1/issues"
+  },
+  "homepage": "https://github.com/recognitionone/civ-clicker-timer-1#readme",
+  "devDependencies": {
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
