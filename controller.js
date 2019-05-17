@@ -1,4 +1,4 @@
-class MyCounterController {
+ebpack.config.jsclass MyCounterController {
 	constructor() {
 		this.view = new MyCounterView();
 		this.model = new MyCounterModel(10, 0);
