@@ -1,27 +1,46 @@
 class MyCounterView {
 	constructor() {
 		this.demo = document.getElementById("demo");
-		this.startButton = document.getElementById("startButton");
-		this.pauseButton = document.getElementById("pauseButton");
+		this.startPauseButton = document.getElementById("startPauseButton");
+		// this.pauseButton = document.getElementById("pauseButton");
 		this.resetButton = document.getElementById("resetButton");
 
 	}
 
-	addStartHandler(startHandler) {
-		this.startButton.onclick = startHandler;
+	addStartPauseHandler(modelStartHandler, modelPauseHandler) {		
+		this.startPauseButton.onclick = (e) => {
+			this.setStartPauseButtonText('Pause');
+			modelStartHandler(e);
+
+			this.addPauseHandler(modelPauseHandler, modelStartHandler);
+		}
+	}
+
+	addPauseHandler(modelPauseHandler, modelStartHandler) {
+		this.startPauseButton.onclick = (e) => {
+			this.setStartPauseButtonText('Start');
+			modelPauseHandler(e);
+
+			this.addStartPauseHandler(modelStartHandler, modelPauseHandler);
+		}	
 	}
 
 	addResetHandler(resetHandler) {
-		this.resetButton.onclick = resetHandler;
+		this.resetButton.onclick = (e) => {
+			this.setStartPauseButtonText('Start');
+			resetHandler(e);
+		}
 	}
 
-	setupText(text) {
+	setTimerDisplay(text) {
 		this.demo.innerHTML = text;
 	}
 
-	toggleButtonText(text) {
-		this.startButton.innerHTML = text;
+	setStartPauseButtonText(text) {
+		this.startPauseButton.innerHTML = text;
 	}
+
+
 
 
 

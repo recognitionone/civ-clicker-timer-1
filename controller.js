@@ -5,15 +5,30 @@ class MyCounterController {
 	}
 
 	init() {
-		this.view.addStartHandler (() => { this.model.start(
-			(text) => { this.view.setupText(text) },
-			(text) => { this.view.toggleButtonText(text) }
-			) });
+		this.addStartPauseHandler();
 
 		this.view.addResetHandler (() => { this.model.reset(
-			(text) => { this.view.setupText(text) },
-			(text) => { this.view.toggleButtonText(text) }
-			) });
+			this.setTimerDisplay.bind(this)
+		) });
+	}
+
+	addStartPauseHandler() {
+		this.view.addStartPauseHandler (
+			this.modelStartHandler.bind(this),
+			() => { this.model.pause() }
+		)
+	}
+	
+	modelStartHandler() {
+		this.model.start( this.setTimerDisplay.bind(this) )
+	}
+
+	setTimerDisplay(text) {
+		this.view.setTimerDisplay(text)
+		if (text === 'koniec') {
+			this.model.reset(this.setTimerDisplay.bind(this));
+			this.view.startPauseButton.click();
+		}
 	}
 }
 
