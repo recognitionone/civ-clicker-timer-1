@@ -1,11 +1,16 @@
 class MyCounterView {
-	constructor() {
-		this.demo = document.getElementById("demo");
-		this.startButton = document.getElementById("startButton");
-		this.pauseButton = document.getElementById("pauseButton");
-		this.resetButton = document.getElementById("resetButton");
+	constructor(displayId, startButtonId, pauseButtonId, resetButtonId) {
+		// this.displayId = displayId || "demo"; //etc
+		//TODO dokończyć tą metodą
 
-		
+
+		// this.demo = document.getElementById(this.displayId); //etc
+		this.demo = document.getElementById(displayId); 
+		this.startButton = document.getElementById(startButtonId);
+		this.pauseButton = document.getElementById(pauseButtonId);
+		this.resetButton = document.getElementById(resetButtonId);	
+
+
 	}
 
 	addStartHandler(startHandler) {
