@@ -10,7 +10,6 @@ class MyCounterModel {
 
 	start(callbackFunction) {
 		this.timer = setInterval(() => {
-			console.log(this.currentValue);
 			if(this.currentValue === this.stopValue) {
 				clearInterval(this.timer);
 				callbackFunction("koniec");
@@ -26,13 +25,7 @@ class MyCounterModel {
 	}
 
 	reset(callbackFunction) {
-
-		console.log(this.startButtonValue);
-
 		clearInterval(this.timer);
-
-		console.log(this.timer);
-
 		this.currentValue = this.initialValue;
 		callbackFunction("reset");
 		this.startButtonValue = false;

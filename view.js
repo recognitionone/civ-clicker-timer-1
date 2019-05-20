@@ -2,16 +2,13 @@ class MyCounterView {
 	constructor() {
 		this.demo = document.getElementById("demo");
 		this.startPauseButton = document.getElementById("startPauseButton");
-		// this.pauseButton = document.getElementById("pauseButton");
 		this.resetButton = document.getElementById("resetButton");
-
 	}
 
 	addStartPauseHandler(modelStartHandler, modelPauseHandler) {		
 		this.startPauseButton.onclick = (e) => {
 			this.setStartPauseButtonText('Pause');
 			modelStartHandler(e);
-
 			this.addPauseHandler(modelPauseHandler, modelStartHandler);
 		}
 	}
@@ -20,7 +17,6 @@ class MyCounterView {
 		this.startPauseButton.onclick = (e) => {
 			this.setStartPauseButtonText('Start');
 			modelPauseHandler(e);
-
 			this.addStartPauseHandler(modelStartHandler, modelPauseHandler);
 		}	
 	}
@@ -39,10 +35,4 @@ class MyCounterView {
 	setStartPauseButtonText(text) {
 		this.startPauseButton.innerHTML = text;
 	}
-
-
-
-
-
-
 }

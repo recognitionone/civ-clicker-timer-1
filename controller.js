@@ -6,7 +6,6 @@ class MyCounterController {
 
 	init() {
 		this.addStartPauseHandler();
-
 		this.view.addResetHandler (() => { this.model.reset(
 			this.setTimerDisplay.bind(this)
 		) });
