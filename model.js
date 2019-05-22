@@ -26,10 +26,5 @@ class MyCounterModel {
 		clearInterval(this.timer);
 		this.currentValue = this.initialValue;
 		callbackFunction("reset");
-	}
-
-
-	
-
-	
+	}	
 }

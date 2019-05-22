@@ -1,4 +1,4 @@
-class MyCounterView2 extends MyCounterView {
+class MyCounterColoredView extends MyCounterView {
 
 	constructor() {
 		super("demoB", "startButtonB", "pauseButtonB", "resetButtonB");

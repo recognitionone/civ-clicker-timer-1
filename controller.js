@@ -1,43 +1,33 @@
 class MyCounterController {
 	constructor() {
-		this.view = new MyCounterView("demo", "startButton", "pauseButton", "resetButton");
-		this.view2 = new MyCounterView2(); //coloredView ex.
-
+		this.view = new MyCounterView();
+		this.coloredView = new MyCounterColoredView();
 		this.model = new MyCounterModel(10, 0);
 	}
 
 	init() {
-	
-	// reset i pause do oddzielnej funkcji
+		this.view.addStartHandler (() => { this.model.start((text) => { this.view.setupText(text); this.coloredView.setupText(text)}) });
 
-		this.view.addStartHandler (() => { this.model.start(
-			(text) => { this.view.setupText(text);
-						this.view2.setupText(text)}
-			) });
+		this.coloredView.addStartHandler (() => 
+			{ this.model.start((text) => { this.view.setupText(text); this.coloredView.setupText(text) }),
+			  this.coloredView.setupColor() });
 
-		this.view.addPauseHandler (() => { this.model.pause() });
+		this.addPauseHandler();
+		this.addResetHandler();
+	}
 
-		this.view.addResetHandler (() => { this.model.reset(
-			(text) => { this.view.setupText(text);
-						this.view2.setupText(text)
-						 }
-			) });
+	addPauseHandler() {
+		const initPause = () => { this.model.pause() };
 
+		this.view.addPauseHandler (initPause);
+		this.coloredView.addPauseHandler (initPause);
+	}
 
+	addResetHandler() {
+		const initReset = () => { this.model.reset((text) => { this.view.setupText(text); this.coloredView.setupText(text)}) };
 
-
-		this.view2.addStartHandler (() => 
-			{ this.model.start((text) => { this.view.setupText(text); this.view2.setupText(text) }),
-			 this.view2.setupColor() }	
-		);
-
-		this.view2.addPauseHandler (() => { this.model.pause() });
-
-		this.view2.addResetHandler (() => { this.model.reset(
-			(text) => { this.view.setupText(text);
-						this.view2.setupText(text)
-						 }
-			) });
+		this.view.addResetHandler(initReset);
+		this.coloredView.addResetHandler(initReset);
 	}
 }
 
