@@ -1,4 +1,8 @@
-ebpack.config.jsclass MyCounterController {
+import { MyCounterModel } from './model.js';
+import { MyCounterView } from './view.js';
+ 
+
+export class MyCounterController {
 	constructor() {
 		this.view = new MyCounterView();
 		this.model = new MyCounterModel(10, 0);
@@ -11,6 +15,4 @@ ebpack.config.jsclass MyCounterController {
 	}
 }
 
-const counterCtr = new MyCounterController();
 
-counterCtr.init();
