@@ -12,22 +12,19 @@ class MyCounterController {
 			{ this.model.start((text) => { this.view.setupText(text); this.coloredView.setupText(text) }),
 			  this.coloredView.setupColor() });
 
-		this.addPauseHandler();
-		this.addResetHandler();
+		this.view.addPauseHandler (this.initPause());
+		this.coloredView.addPauseHandler (this.initPause());
+
+		this.view.addResetHandler(this.initReset());
+		this.coloredView.addResetHandler(this.initReset());
 	}
 
-	addPauseHandler() {
-		const initPause = () => { this.model.pause() };
-
-		this.view.addPauseHandler (initPause);
-		this.coloredView.addPauseHandler (initPause);
+	initPause() {
+		return () => { this.model.pause() };
 	}
 
-	addResetHandler() {
-		const initReset = () => { this.model.reset((text) => { this.view.setupText(text); this.coloredView.setupText(text)}) };
-
-		this.view.addResetHandler(initReset);
-		this.coloredView.addResetHandler(initReset);
+	initReset() {
+		return () =>  { this.model.reset((text) => { this.view.setupText(text); this.coloredView.setupText(text)}) };
 	}
 }
 
