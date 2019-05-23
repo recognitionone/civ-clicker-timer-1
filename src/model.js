@@ -1,4 +1,4 @@
-class MyCounterModel {
+export class MyCounterModel {
 	constructor(initialValue, stopValue) {
 		this.initialValue = initialValue;
 		this.currentValue = initialValue;
