@@ -9,9 +9,12 @@ export class MyCounterController {
 	}
 
 	init() {
-		this.view.addStartHandler(() => { this.model.start((text) => { this.view.setupText(text) }) });
+		this.view.addStartHandler(() => { this.model.start() });
 		this.view.addPauseHandler (() => { this.model.pause() });
-		this.view.addResetHandler (() => { this.model.reset((text) => { this.view.setupText(text) }) });
+		this.view.addResetHandler (() => { this.model.reset() });
+
+		this.model.counterEvent.addEventListener("reset", () => {this.view.setupText("reset")} );
+		this.model.counterEvent.addEventListener("changeValue", (e) => {this.view.setupText(e.detail.text)} )
 	}
 }
 
