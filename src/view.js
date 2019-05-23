@@ -1,4 +1,4 @@
-class MyCounterView {
+export class MyCounterView {
 	constructor(displayId, startButtonId, pauseButtonId, resetButtonId) {
 		this.displayId = displayId || "demo";
 		this.startButtonId = startButtonId || "startButton";

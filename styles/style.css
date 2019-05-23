@@ -1,0 +1,17 @@
+@font-face {
+	font-family: 'MyFont';
+	/*src: url('./RobotoCondensed-Light.ttf') format('ttf');*/
+
+	font-weight: 600;
+	font-style: normal;
+}
+
+
+
+.hello {
+  color: green;
+  /*background: url('./dog.jpg');*/
+  margin: 20px;
+
+  font-family: 'MyFont';
+}

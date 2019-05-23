@@ -1,19 +1,21 @@
-class MyCounterModel {
+export class MyCounterModel {
 	constructor(initialValue, stopValue) {
 		this.initialValue = initialValue;
 		this.currentValue = initialValue;
 		this.stopValue = stopValue;
 		this.timer = null;
+		this.counterEvent = new EventTarget();
 	}
 
-	start(callbackFunction) {
+	start() {
+		this.counterEvent.dispatchEvent(new Event("start"));
 		this.timer = setInterval(() => {
 			if(this.currentValue === this.stopValue) {
 				clearInterval(this.timer);
-				callbackFunction("koniec");
+				this.counterEvent.dispatchEvent(new Event("koniec"));
 			} else {
 				this.currentValue--;
-				callbackFunction(this.currentValue);
+				this.counterEvent.dispatchEvent(new CustomEvent("changeValue", { detail: { text: this.currentValue} }));
 			}
 		}, 1000);
 	}
@@ -22,9 +24,9 @@ class MyCounterModel {
 		clearInterval(this.timer);
 	}
 
-	reset(callbackFunction) {
+	reset() {
 		clearInterval(this.timer);
 		this.currentValue = this.initialValue;
-		callbackFunction("reset");
-	}	
+		this.counterEvent.dispatchEvent(new Event("reset"));
+	}
 }

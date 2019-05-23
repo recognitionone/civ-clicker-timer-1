@@ -1,4 +1,6 @@
-class MyCounterColoredView extends MyCounterView {
+import { MyCounterView } from './view.js';
+
+export class MyCounterColoredView extends MyCounterView {
 
 	constructor() {
 		super("demoB", "startButtonB", "pauseButtonB", "resetButtonB");
