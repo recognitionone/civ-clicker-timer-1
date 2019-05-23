@@ -15,7 +15,7 @@ class MyCounterModel {
 				this.counterEvent.dispatchEvent(new Event("koniec"));
 			} else {
 				this.currentValue--;
-				this.counterEvent.dispatchEvent(new CustomEvent("build", { detail: { text: this.currentValue} }));
+				this.counterEvent.dispatchEvent(new CustomEvent("changeValue", { detail: { text: this.currentValue} }));
 			}
 		}, 1000);
 	}
