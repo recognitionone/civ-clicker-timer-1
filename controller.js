@@ -9,7 +9,6 @@ class MyCounterController {
 		this.view.addPauseHandler (() => { this.model.pause() });
 		this.view.addResetHandler (() => { this.model.reset() });
 
-		// this.model.counterEvent.addEventListener("koniec", () => {console.log("koniec") } );
 		this.model.counterEvent.addEventListener("reset", () => {this.view.setupText("reset")} );
 		this.model.counterEvent.addEventListener("changeValue", (e) => {this.view.setupText(e.detail.text)} )
 	}
