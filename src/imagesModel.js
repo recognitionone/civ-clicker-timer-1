@@ -1,15 +1,19 @@
+
+
 export class ImagesModel {
-	constructor() {
-		this.myObj = {
-			beforeButonimage:  "./assets/start.png",
-			successButonimage: "./assets/success.png",
-			failedButonimage:  "./assets/fail.png",
-			timeLaps : {
-					0:  "./assets/step1.png",
-					5:  "./assets/step2.png",
-					10: "./assets/step3.png",
-					15: "./assets/step4.png"
-			}
-		}
+	constructor(imagesData) {
+		//TODO - sprawdzanie/ validacja danych 
+		Object.assign(this, imagesData);
+	}	
+
+
+	addImage(timer) {
+		const filteredArray = Object.keys(this.timeLaps).filter((elem) => { 
+			return elem >= timer;
+		 })
+		return this.timeLaps[filteredArray[0]];
+		
 	}
+
+	//TODO taka funkcja - jeśli mam tylko listę elementów, podzielić ją po równo w czasie, mając dany czas 
 }
