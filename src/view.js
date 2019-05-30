@@ -6,6 +6,7 @@ export class MyCounterView {
 		this.resetButton = document.getElementById("resetButton");
 
 		this.image = document.getElementById("image");
+		this.body = document.body;
 	}
 
 	addStartHandler(startHandler) {

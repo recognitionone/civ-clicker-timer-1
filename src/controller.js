@@ -11,9 +11,6 @@ export class MyCounterController {
 		this.model = new MyCounterModel(15, 0);
 
 		this.imagesModel = new ImagesModel(imagesMock);
-
-
-		// this.obj = this.imagesModel.myObj;
 	}
 
 	init() {
@@ -24,29 +21,19 @@ export class MyCounterController {
 
 		this.model.counterEvent.addEventListener("changeValue", 
 			(e) => {
-					console.log(this.imagesModel.addImage(e.detail.text));
 					this.view.setupText(e.detail.text);
 					this.setImage(this.imagesModel.addImage(e.detail.text));
-					
 			} )
+		this.listenToEvents("koniec", this.imagesModel.successButonimage);
 
-
-
-
-
-
-		this.addListener("koniec", this.imagesModel.successButonimage);
-		// this.addListener("step1",  this.obj.timeLaps[0]);
-		// this.addListener("step2",  this.obj.timeLaps[5]);
-		// this.addListener("step3",  this.obj.timeLaps[10]);
-		// this.addListener("step4",  this.obj.timeLaps[15]);
+		this.view.body.addEventListener('mousemove', e => { this.setImage( this.imagesModel.failedButonimage ) });
 	}
 
 	setImage(name) {
 		return this.view.setupImage( name );		
 	}
 
-	addListener(eventName, imageLink) {
+	listenToEvents(eventName, imageLink) {
 		return this.model.counterEvent.addEventListener(eventName, () => {this.setImage(imageLink)} );
 	}
 }
