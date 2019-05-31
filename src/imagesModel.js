@@ -1,8 +1,19 @@
 export class ImagesModel {
 	constructor(imagesData) {
 		//TODO - sprawdzanie/ validacja danych 
+		this.IsValidJSONString = function(imagesData) {
+	        try {
+	            JSON.parse(imagesData);
+	        } catch (e) {
+	            return false;
+	        }
+	        return true;
+	    }
+
 		Object.assign(this, imagesData);
 	}	
+
+
 
 	getImage(timer) {
 		const filteredArray = Object.keys(this.timeLaps).filter((elem) => { 
