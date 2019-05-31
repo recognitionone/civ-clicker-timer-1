@@ -1,19 +1,24 @@
-
-
 export class ImagesModel {
 	constructor(imagesData) {
 		//TODO - sprawdzanie/ validacja danych 
 		Object.assign(this, imagesData);
 	}	
 
-
-	addImage(timer) {
+	getImage(timer) {
 		const filteredArray = Object.keys(this.timeLaps).filter((elem) => { 
 			return elem >= timer;
 		 })
 		return this.timeLaps[filteredArray[0]];
-		
 	}
 
-	//TODO taka funkcja - jeśli mam tylko listę elementów, podzielić ją po równo w czasie, mając dany czas 
+	addCustomTick(initialValue, stopValue) {
+		const timeLapsArrayLenght = Object.keys(this.timeLaps).length;
+		const timeLength = initialValue - stopValue;
+		const tick = timeLength / timeLapsArrayLenght;
+		return tick;
+	}
+
+	addImageCustomTick(number) {
+		return Object.values(this.timeLaps)[number];
+	}
 }
