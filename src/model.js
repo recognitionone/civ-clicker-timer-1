@@ -8,19 +8,21 @@ export class MyCounterModel {
 		this.timeLapsValue = 0;
 	}
 
-	start(customTick) {
+	start() {
 		this.createCustomEvent("start")
 
 		this.timer = setInterval(() => {
 			if(this.currentValue === this.stopValue) {
 				clearInterval(this.timer);
-				this.createCustomEvent("koniec")
+				this.createCustomEvent("end")
 				this.timeLapsValue = 0;
+				this.currentValue = this.initialValue;
 			} else {
+				this.createCustomEvent("changeValue", { detail: { 
+					counterValue: this.currentValue, 
+					tickNumber: this.timeLapsValue} });
 				this.currentValue--;
 				this.timeLapsValue++;
-				this.createCustomEvent("changeValue", { detail: { counterValue: this.currentValue, tickNumber: this.timeLapsValue} });
-				// this.createCustomEvent("timeLapsValue", { detail: { text: this.timeLapsValue }});
 			}
 		}, 1000);
 	}
