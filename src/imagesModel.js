@@ -20,7 +20,10 @@ export class ImagesModel {
 	}
 
 	getCustomTick(timeLength) {
-		//sprawdź czy timeLength != 0;
-		return Math.floor(timeLength / this.timeLaps.length);
+		if (timeLength >= 1) {
+			return Math.floor(timeLength / this.timeLaps.length);
+		} else {
+			alert("wrong timer");
+		}
 	}
 }
