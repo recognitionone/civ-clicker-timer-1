@@ -10,13 +10,13 @@ export class MyCounterController {
 		this.view = new MyCounterView();
 		this.model = new MyCounterModel(20, 0);
 
-		this.imagesModel = new ImagesModel(imagesMock);
+		this.imagesModel = new ImagesModel(imagesMock, this.model.initialValue - this.model.stopValue );
 		this.customTick = 10000;
 	}
 
 	init() {
-		this.customTick = this.imagesModel.addCustomTick(20, 0);
-		console.log("custom tick:", this.customTick);
+		// this.customTick = this.imagesModel.getCustomTick(this.model.initialValue, this.model.stopValue);
+		// console.log("custom tick:", this.customTick);
 
 		this.view.addStartHandler(() => { 
 			this.model.start(this.customTick), 
@@ -31,18 +31,20 @@ export class MyCounterController {
 		this.setImage(this.imagesModel.beforeButonimage);
 
 		this.model.counterEvent.addEventListener("changeValue", 
-			(e) => { this.view.setupText(e.detail.text) } )
+			(e) => { 
+				this.view.setupText(e.detail.counterValue);
+				this.setImage(this.imagesModel.getImage(e.detail.tickNumber));
 
-		this.model.counterEvent.addEventListener("timeLapsValue", 
-			(e) => {
-					console.log(e.detail.text);
-					this.setImage(this.imagesModel.addImageCustomTick(e.detail.text));
-			} )
-		
+			 } )		
 
 		this.addImageChangeListener("koniec", this.imagesModel.successButonimage);
 
-		this.view.body.addEventListener('mousemove', e => { this.setImage( this.imagesModel.failedButonimage ) });
+		// this.view.body.addEventListener('mousemove', e => { 
+		// 	this.setImage( this.imagesModel.failedButonimage ); 
+		// 	this.model.reset();
+		// 	this.view.setupText("reset");
+		// 	//TODO - uporządkować to
+		// });
 	}
 
 	setImage(name) {

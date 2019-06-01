@@ -18,12 +18,11 @@ export class MyCounterModel {
 				this.timeLapsValue = 0;
 			} else {
 				this.currentValue--;
-				this.createCustomEvent("changeValue", { detail: { text: this.currentValue} });
-
-				this.createCustomEvent("timeLapsValue", { detail: { text: this.timeLapsValue }});
 				this.timeLapsValue++;
+				this.createCustomEvent("changeValue", { detail: { counterValue: this.currentValue, tickNumber: this.timeLapsValue} });
+				// this.createCustomEvent("timeLapsValue", { detail: { text: this.timeLapsValue }});
 			}
-		}, customTick * 1000);
+		}, 1000);
 	}
 
 	createCustomEvent(eventName, eventDetail) {
