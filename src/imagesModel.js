@@ -1,3 +1,9 @@
+// var Ajv = require('ajv');
+// var ajv = new Ajv({allErrors: true});
+// var valid = ajv.validate(schema, data);
+// if (!valid) console.log(ajv.errors);
+
+
 export class ImagesModel {
 	constructor(imagesData, timeLength) {
 
@@ -9,6 +15,7 @@ export class ImagesModel {
 		//         return false;
 		//     }
 		// }
+
 
 		if (imagesData.beforeButonimage 
 			&& imagesData.successButonimage 
