@@ -1,17 +1,25 @@
 export class ImagesModel {
 	constructor(imagesData, timeLength) {
-		//TODO - sprawdzanie/ validacja danych 
-		// this.IsValidJSONString = function(imagesData) {
-	 //        try {
-	 //            JSON.parse(imagesData);
-	 //        } catch (e) {
-	 //            return false;
-	 //        }
-	 //        return true;
-	 //    }
 
+		// function isValidJson(json) {
+		//     try {
+		//         JSON.parse(json);
+		//         return true;
+		//     } catch (e) {
+		//         return false;
+		//     }
+		// }
 
-		Object.assign(this, imagesData);
+		if (imagesData.beforeButonimage 
+			&& imagesData.successButonimage 
+		    && imagesData.failedButonimage
+		    && imagesData.timeLaps.length >= 1) 
+		{		 
+			Object.assign(this, imagesData);
+		} else {
+			console.log("invalid input");
+		}
+
 		this.timeTick = this.getCustomTick(timeLength);
 	}	
 
