@@ -6,16 +6,25 @@ import { imagesMock } from "../mock/imagesMock.js";
 export class MyCounterController {
 	constructor() {
 		this.view = new MyCounterView();
-		this.model = new MyCounterModel(9, 0);
-		this.imagesModel = new ImagesModel(imagesMock, this.model.initialValue - this.model.stopValue );
+		this.model = new MyCounterModel(17, 0);
+
+		try {
+			this.imagesModel = new ImagesModel(JSON.stringify(imagesMock),
+				 this.model.initialValue - this.model.stopValue );
+		} catch (e) {
+			//TODO Error handling
+			console.error(e);
+		}
 	}
 
 	init() {
 		this.setImage(this.imagesModel.beforeButonimage);
 		this.view.addStartHandler(() => { this.model.start() });
 		this.view.addPauseHandler(() => { this.model.pause() });
-		this.view.addResetHandler(() => { this.model.reset() });
-		this.view.body.addEventListener('mousemove', e => { this.model.reset() });
+		this.view.addFailHandler(() => { this.model.fail() });
+
+		//TODO niech nie działa jak nie był wciśnięty start
+		this.view.body.addEventListener('mousemove', e => { this.model.fail() });
 
 		this.model.counterEvent.addEventListener("changeValue", (e) => { 
 				this.setImage(this.imagesModel.getImage(e.detail.tickNumber));
@@ -23,7 +32,7 @@ export class MyCounterController {
 		});
 
 		this.addChangeListener("end", "success", this.imagesModel.successButonimage);
-		this.addChangeListener("reset", "reset", this.imagesModel.failedButonimage);
+		this.addChangeListener("fail", "fail", this.imagesModel.failedButonimage);
 	}
 
 	setImage(name) {

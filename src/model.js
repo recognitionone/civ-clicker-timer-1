@@ -11,7 +11,7 @@ export class MyCounterModel {
 	start() {
 		this.timer = setInterval(() => {
 			if (this.currentValue === this.stopValue) {
-				this.endTimer("end");
+				this.endTimer("end"); //happy path
 			} else {
 				this.createCustomEvent("changeValue", { detail: { 
 					counterValue: this.currentValue, 
@@ -26,9 +26,9 @@ export class MyCounterModel {
 		return this.counterEvent.dispatchEvent(new CustomEvent(eventName, eventDetail));
 	}
 
-	pause() { clearInterval(this.timer) }
+	// pause() { clearInterval(this.timer) }
 
-	reset() { this.endTimer("reset") }
+	fail() { this.endTimer("fail") } //fail
 
 	endTimer(eventName) {
 		clearInterval(this.timer);

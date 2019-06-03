@@ -17,7 +17,7 @@ export class MyCounterView {
 		this.pauseButton.onclick = pauseHandler;
 	}
 
-	addResetHandler(resetHandler) {
+	addFailHandler(resetHandler) {
 		this.resetButton.onclick = resetHandler;
 	}
 
@@ -30,3 +30,7 @@ export class MyCounterView {
 	}
 
 }
+
+
+//TODO usuń wszystko poza setupText, setupImage
+//TODO niech się robi nowy button "retry" na success albo fail 
