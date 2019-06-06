@@ -28,6 +28,5 @@
     "webpack-cli": "^3.3.2"
   },
   "dependencies": {
-    "ajv": "^6.10.0"
   }
 }
