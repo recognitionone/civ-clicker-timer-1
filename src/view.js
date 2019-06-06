@@ -5,8 +5,6 @@ export class MyCounterView {
 		this.pauseButton = document.getElementById("pauseButton");
 		this.resetButton = document.getElementById("resetButton");
 
-		this.image = document.getElementById("image");
-		this.body = document.body;
 	}
 
 	addStartHandler(startHandler) {
@@ -17,16 +15,12 @@ export class MyCounterView {
 		this.pauseButton.onclick = pauseHandler;
 	}
 
-	addFailHandler(resetHandler) {
+	addResetHandler(resetHandler) {
 		this.resetButton.onclick = resetHandler;
 	}
 
 	setupText(text) {
 		this.demo.innerHTML = text;
-	}
-
-	setupImage(imageName) {
-		this.image.src = imageName;
 	}
 
 }

@@ -5,33 +5,28 @@ export class MyCounterModel {
 		this.stopValue = stopValue;
 		const timer = null;
 		this.counterEvent = new EventTarget();
-		this.timeLapsValue = 0;
 	}
 
 	start() {
+		this.counterEvent.dispatchEvent(new Event("start"));
 		this.timer = setInterval(() => {
-			if (this.currentValue === this.stopValue) {
-				this.endTimer("success");
+			if(this.currentValue === this.stopValue) {
+				clearInterval(this.timer);
+				this.counterEvent.dispatchEvent(new Event("koniec"));
 			} else {
-				this.createCustomEvent("changeValue", { detail: { 
-					counterValue: this.currentValue, 
-					tickNumber: this.timeLapsValue} });
 				this.currentValue--;
-				this.timeLapsValue++;
+				this.counterEvent.dispatchEvent(new CustomEvent("changeValue", { detail: { text: this.currentValue} }));
 			}
 		}, 1000);
 	}
 
-	createCustomEvent(eventName, eventDetail) {
-		return this.counterEvent.dispatchEvent(new CustomEvent(eventName, eventDetail));
+	pause() {
+		clearInterval(this.timer);
 	}
 
-	fail() { this.endTimer("fail") }
-
-	endTimer(eventName) {
+	reset() {
 		clearInterval(this.timer);
 		this.currentValue = this.initialValue;
-		this.timeLapsValue = 0;
-		this.counterEvent.dispatchEvent(new Event(eventName));		
+		this.counterEvent.dispatchEvent(new Event("reset"));
 	}
 }
