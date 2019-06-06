@@ -1,8 +1,3 @@
-// var Ajv = require('ajv');
-// var ajv = new Ajv({allErrors: true});
-// var valid = ajv.validate(schema, data);
-// if (!valid) console.log(ajv.errors);
-
 import { JsonValidator } from "../common/json"
 
 export class ImagesModel {
@@ -14,30 +9,24 @@ export class ImagesModel {
 
 		imagesData = JSON.parse(imagesData);
 
-
-
-		if (!imagesData.beforeButonimage) {
-			throw new Error ("can't find beforeButonimage property");
+		if (!imagesData.beforeButtonimage) {
+			throw new Error ("can't find beforeButtonimage property");
 		} 
-		//TODO poprawić Buton na Btton
-		//etc
-
-		// if (imagesData.beforeButonimage 
-		// 	&& imagesData.successButonimage 
-		//     && imagesData.failedButonimage
-		//     && imagesData.timeLaps.length >= 1) 
-		// {		 
-		// 	Object.assign(this, imagesData);
-		// } else {
-		// 	console.log("invalid input");
-		// }
+		if (!imagesData.successButtonimage) {
+			throw new Error ("can't find successButtonimage property");
+		} 
+		if (!imagesData.failedButtonimage) {
+			throw new Error ("can't find failedButtonimage property");
+		} 
+		if (imagesData.timeLaps.length < 1) {
+			throw new Error ("not enough assets in timeLaps property");
+		} 
 
 		Object.assign(this, imagesData);
 		this.timeTick = this.getCustomTick(timeLength);
 	}	
 
 	getImage(timer) {
-		// return this.timeLaps[Math.floor(timer / this.timeTick)] || this.timeLaps[this.timeLaps.length - 1];
 		return this.timeLaps[Math.floor(timer / this.timeTick)];
 	}
 

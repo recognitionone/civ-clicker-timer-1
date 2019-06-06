@@ -12,18 +12,16 @@ export class MyCounterController {
 			this.imagesModel = new ImagesModel(JSON.stringify(imagesMock),
 				 this.model.initialValue - this.model.stopValue );
 		} catch (e) {
-			//TODO Error handling
 			console.error(e);
 		}
 	}
 
 	init() {
-		this.setImage(this.imagesModel.beforeButonimage);
+		this.setImage(this.imagesModel.beforeButtonimage);
 		this.view.addStartHandler(() => { this.model.start() });
 		this.view.addPauseHandler(() => { this.model.pause() });
 		this.view.addFailHandler(() => { this.model.fail() });
 
-		//TODO niech nie działa jak nie był wciśnięty start
 		this.view.body.addEventListener('mousemove', e => { this.model.fail() });
 
 		this.model.counterEvent.addEventListener("changeValue", (e) => { 
@@ -31,8 +29,8 @@ export class MyCounterController {
 				this.view.setupText(e.detail.counterValue);
 		});
 
-		this.addChangeListener("end", "success", this.imagesModel.successButonimage);
-		this.addChangeListener("fail", "fail", this.imagesModel.failedButonimage);
+		this.addChangeListener("success", "success", this.imagesModel.successButtonimage);
+		this.addChangeListener("fail", "fail", this.imagesModel.failedButtonimage);
 	}
 
 	setImage(name) {

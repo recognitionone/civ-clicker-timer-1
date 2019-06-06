@@ -30,7 +30,3 @@ export class MyCounterView {
 	}
 
 }
-
-
-//TODO usuń wszystko poza setupText, setupImage
-//TODO niech się robi nowy button "retry" na success albo fail 

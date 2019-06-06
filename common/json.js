@@ -4,7 +4,6 @@ export class JsonValidator {
 	        JSON.parse(json);
 	        return true;
 	    } catch (e) {
-	    	// console.error(e);
 	        return false;
 	    }
 	}

@@ -1,7 +1,7 @@
 export const imagesMock = {
-	"beforeButonimage":  "./assets/start.png",
-	"successButonimage": "./assets/success.png",
-	"failedButonimage":  "./assets/fail.png",
+	"beforeButtonimage":  "./assets/start.png",
+	"successButtonimage": "./assets/success.png",
+	"failedButtonimage":  "./assets/fail.png",
 	"timeLaps" : [
 			   "./assets/step1.png",
 			   "./assets/step2.png",
