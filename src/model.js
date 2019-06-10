@@ -8,10 +8,16 @@ export class MyCounterModel {
 		this.timeLapsValue = 0;
 	}
 
+//TODO find way to properly use interface
+
 	interface() {
+		initialValue:null;
+		stopValue: null;
 		currentValue: null;
 		counterEvent: null; //not working yet
 		isTimerOn: false;
+		// start();
+		// stop();
 	}
 
 	start() {
@@ -20,17 +26,21 @@ export class MyCounterModel {
 		this.timer = setInterval(
 			() => {
 				if (this.interface.currentValue === this.stopValue) { 
-					this.interface.isTimerOn = false;
+					this.stop();
 					this.endEvent();
-					this.counterEvent.dispatchEvent(new Event("end"));
-
 				} else {
-					
-						this.countingEvent();
-						this.interface.currentValue--;
-						this.timeLapsValue++;		
+					this.countingEvent();
+					this.interface.currentValue--;
+					this.timeLapsValue++;		
 				}
 			}, 1000);
+	}
+
+	stop() {
+		clearInterval(this.timer);
+		this.interface.currentValue = this.initialValue;
+		this.timeLapsValue = 0;
+		this.interface.isTimerOn = false;
 	}
 
 	countingEvent() {
@@ -40,9 +50,8 @@ export class MyCounterModel {
 	}
 
 	endEvent() {
-		clearInterval(this.timer);
-		this.interface.currentValue = this.initialValue;
-		this.timeLapsValue = 0;
-		
+		this.counterEvent.dispatchEvent(new Event("end"));
 	}
+
+	
 }

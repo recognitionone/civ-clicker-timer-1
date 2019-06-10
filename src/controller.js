@@ -18,21 +18,31 @@ export class MyCounterController {
 
 	init() {
 		this.model.start();
-		this.view.body.addEventListener('mousemove', this.checkMouseMove, true);
+		this.view.body.addEventListener('mousemove', (e) => { 
+				this.setImage(this.imagesModel.failedButtonimage);
+				this.view.setupText("fail");
+				this.view.showRetry();
+				this.model.stop();
+		 }, false);
 
 		this.model.counterEvent.addEventListener("changeValue", (e) => { 
 				this.setImage(this.imagesModel.getImage(e.detail.tickNumber));
 				this.view.setupText(e.detail.counterValue);
-				console.log(this.model.interface.isTimerOn);
 		});
 
 		this.model.counterEvent.addEventListener("end", () => { 
 			this.setImage(this.imagesModel.successButtonimage);
 			this.view.setupText("success");
 			this.view.showRetry();
-			console.log("success");
-			console.log(this.model.interface.isTimerOn);
-			this.view.body.removeEventListener('mousemove', this.checkMouseMove, true);
+
+	//TODO: find way to make removeListener work
+			
+			this.view.body.removeEventListener('mousemove', (e) => { 
+				this.setImage(this.imagesModel.failedButtonimage);
+				this.view.setupText("fail");
+				this.view.showRetry();
+				this.model.stop();
+			 }, false);
 		})
 	}
 
@@ -41,12 +51,10 @@ export class MyCounterController {
 	}
 
 	checkMouseMove() {
-		(e) => {		
 			this.setImage(this.imagesModel.failedButtonimage);
 			this.view.setupText("fail");
 			this.view.showRetry();
 			this.model.endEvent();
-		}
 	}
 }
 
