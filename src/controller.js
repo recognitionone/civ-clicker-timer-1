@@ -6,7 +6,7 @@ import { imagesMock } from "../mock/imagesMock.js";
 export class MyCounterController {
 	constructor() {
 		this.view = new MyCounterView();
-		this.model = new MyCounterModel(17, 0);
+		this.model = new MyCounterModel(6, 0);
 
 		try {
 			this.imagesModel = new ImagesModel(JSON.stringify(imagesMock),
@@ -17,31 +17,36 @@ export class MyCounterController {
 	}
 
 	init() {
-		this.setImage(this.imagesModel.beforeButtonimage);
-		this.view.addStartHandler(() => { this.model.start() });
-		this.view.addPauseHandler(() => { this.model.pause() });
-		this.view.addFailHandler(() => { this.model.fail() });
-
-		this.view.body.addEventListener('mousemove', e => { this.model.fail() });
+		this.model.start();
+		this.view.body.addEventListener('mousemove', this.checkMouseMove, true);
 
 		this.model.counterEvent.addEventListener("changeValue", (e) => { 
 				this.setImage(this.imagesModel.getImage(e.detail.tickNumber));
 				this.view.setupText(e.detail.counterValue);
+				console.log(this.model.interface.isTimerOn);
 		});
 
-		this.addChangeListener("success", "success", this.imagesModel.successButtonimage);
-		this.addChangeListener("fail", "fail", this.imagesModel.failedButtonimage);
+		this.model.counterEvent.addEventListener("end", () => { 
+			this.setImage(this.imagesModel.successButtonimage);
+			this.view.setupText("success");
+			this.view.showRetry();
+			console.log("success");
+			console.log(this.model.interface.isTimerOn);
+			this.view.body.removeEventListener('mousemove', this.checkMouseMove, true);
+		})
 	}
 
 	setImage(name) {
 		return this.view.setupImage(name);		
 	}
 
-	addChangeListener(eventName, textValue, imageValue) {
-		this.model.counterEvent.addEventListener(eventName, () => { 
-				this.setImage(imageValue);
-				this.view.setupText(textValue);
-		})		
+	checkMouseMove() {
+		(e) => {		
+			this.setImage(this.imagesModel.failedButtonimage);
+			this.view.setupText("fail");
+			this.view.showRetry();
+			this.model.endEvent();
+		}
 	}
 }
 

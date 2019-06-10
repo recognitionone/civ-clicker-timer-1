@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'MyFont';
-	/*src: url('./RobotoCondensed-Light.ttf') format('ttf');*/
+	src: url('../assets/RobotoCondensed-Light.ttf') format('ttf');
 
 	font-weight: 600;
 	font-style: normal;
@@ -8,10 +8,27 @@
 
 
 
-.hello {
+body {
   color: green;
-  /*background: url('./dog.jpg');*/
-  margin: 20px;
-
   font-family: 'MyFont';
+}
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+
+.display-none {
+	display: none;
+}
+
+.display-block {
+	display: inline-block;
 }

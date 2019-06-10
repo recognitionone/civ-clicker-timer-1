@@ -3,35 +3,46 @@ export class MyCounterModel {
 		this.initialValue = initialValue;
 		this.currentValue = initialValue;
 		this.stopValue = stopValue;
-		const timer = null;
+		this.timer = null;
 		this.counterEvent = new EventTarget();
 		this.timeLapsValue = 0;
 	}
 
+	interface() {
+		currentValue: null;
+		counterEvent: null; //not working yet
+		isTimerOn: false;
+	}
+
 	start() {
-		this.timer = setInterval(() => {
-			if (this.currentValue === this.stopValue) {
-				this.endTimer("success");
-			} else {
-				this.createCustomEvent("changeValue", { detail: { 
-					counterValue: this.currentValue, 
-					tickNumber: this.timeLapsValue} });
-				this.currentValue--;
-				this.timeLapsValue++;
-			}
-		}, 1000);
+		this.interface.currentValue = this.initialValue;
+		this.interface.isTimerOn = true;
+		this.timer = setInterval(
+			() => {
+				if (this.interface.currentValue === this.stopValue) { 
+					this.interface.isTimerOn = false;
+					this.endEvent();
+					this.counterEvent.dispatchEvent(new Event("end"));
+
+				} else {
+					
+						this.countingEvent();
+						this.interface.currentValue--;
+						this.timeLapsValue++;		
+				}
+			}, 1000);
 	}
 
-	createCustomEvent(eventName, eventDetail) {
-		return this.counterEvent.dispatchEvent(new CustomEvent(eventName, eventDetail));
+	countingEvent() {
+		return this.counterEvent.dispatchEvent(new CustomEvent("changeValue", { detail: { 
+					counterValue: this.interface.currentValue, 
+					tickNumber: this.timeLapsValue} }));
 	}
 
-	fail() { this.endTimer("fail") }
-
-	endTimer(eventName) {
+	endEvent() {
 		clearInterval(this.timer);
-		this.currentValue = this.initialValue;
+		this.interface.currentValue = this.initialValue;
 		this.timeLapsValue = 0;
-		this.counterEvent.dispatchEvent(new Event(eventName));		
+		
 	}
 }
