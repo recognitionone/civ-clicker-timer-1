@@ -24,7 +24,9 @@ export class MyCounterController {
 		const any = () =>  { 
 			this.setImage(this.imagesModel.failedButtonimage);
 			this.view.setupText("fail");
-			this.view.showRetry();
+			if(this.view.isRetryOn === false){
+				this.view.createRetry("It was close. Try again")
+			}
 			this.model.stop();
 		};
 
@@ -41,7 +43,11 @@ export class MyCounterController {
 			this.view.body.removeEventListener('mousemove', any, false);
 			this.setImage(this.imagesModel.successButtonimage);
 			this.view.setupText("success");
-			this.view.showRetry();
+			
+			if(this.view.isRetryOn === false){
+				this.view.createRetry("Congratulations! Try another round");
+			}
+
 			this.model.stop();
 		});
 
@@ -52,6 +58,8 @@ export class MyCounterController {
 	setImage(name) {
 		this.view.setupImage(name);		
 	}
+
+
 }
 
 

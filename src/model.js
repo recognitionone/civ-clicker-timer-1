@@ -16,11 +16,9 @@ export class MyCounterModel {
 		this.timer = null;
 		this.counterEvent = new EventTarget();
 		this.timeLapsValue = 0;
-		this.isTimerOn = false;
 	}
 
 	start() {
-		this.isTimerOn = true;
 		this.timer = setInterval(() => { 
 			if (this.currentValue === this.stopValue) { 
 				this.endEvent();
@@ -36,7 +34,6 @@ export class MyCounterModel {
 		clearInterval(this.timer);
 		this.currentValue = this.initialValue;
 		this.timeLapsValue = 0;
-		this.isTimerOn = false;
 	}
 
 	countingEvent() {

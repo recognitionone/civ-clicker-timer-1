@@ -1,11 +1,9 @@
 export class MyCounterView {
 	constructor() {
 		this.counterDisplay = document.getElementById("demo");
-		// this.startButton = document.getElementById("startButton");
-
 		this.image = document.getElementById("image");
 		this.body = document.body;
-		this.retry = document.getElementById('retryButton');
+		this.isRetryOn = false;
 	}
 
 	setupText(text) {
@@ -16,20 +14,12 @@ export class MyCounterView {
 		this.image.src = imageName;
 	}
 
-	// createRetry() {
-	//     this.retry = document.createElement("A");
-	//     const text = document.createTextNode("Retry");
-	//     retry.appendChild(text);
-	//     retry.setAttribute('href','#');
-	//     retry.addClass('display-none');
-	//     document.body.appendChild(retry);
-	// }
-
-	showRetry() {
-		this.retry.classList.add('display-block');
-	}
-
-	hideRetry() {
-		this.retry.classList.add('display-none');
+	createRetry(value) {
+	    const retry = document.createElement("A");
+	    const text = document.createTextNode(value);
+	    retry.appendChild(text);
+	    retry.setAttribute('href','#');
+	    this.body.appendChild(retry);
+	    this.isRetryOn = true;
 	}
 }
