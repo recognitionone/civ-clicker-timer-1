@@ -1,9 +1,10 @@
 export class TimeChooserModel {
 	constructor() {
-
+		this.value = 5;
 	}
 
-	start(value) {
+	save(value) {
+		this.value = value;
 		console.log(value);
 	}
 }
