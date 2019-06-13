@@ -8,13 +8,16 @@ console.log(process.env.PORT);
 
 app.use(express.static('dist'));
 app.use('/assets', express.static('assets'));
+app.use('/images', express.static('mock'));
 
 
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, './index.html'))) 
 //TODOdoczytać o http get, post, delete, put
 
-app.get('/:name', (req, res) => res.send("hello " + req.params.name))
+app.get('/images/:name', (req, res) => res.send("hello " + req.params.name))
+
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 

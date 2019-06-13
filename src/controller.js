@@ -1,12 +1,15 @@
-import { MyCounterModel } from './model.js';
-import { MyCounterView } from './view.js';
-import { ImagesModel } from './imagesModel.js';
-import { imagesMock } from "../mock/imagesMock.js";
+import { MyCounterModel } from './model';
+import { MyCounterView } from './view';
+import { ImagesModel } from './imagesModel';
+
+import { ImagesService } from './imagesService';
+import { imagesMock } from '../mock/imagesMock';
 
 export class MyCounterController {
 	constructor() {
 		this.view = new MyCounterView();
 		this.model = new MyCounterModel(3, 0);
+		this.imagesService = new ImagesService();
 
 		try {
 			this.imagesModel = new ImagesModel(JSON.stringify(imagesMock),
@@ -42,6 +45,8 @@ export class MyCounterController {
 			this.model.stop();
 		});
 
+
+		this.imagesService.getImages();
 	}
 
 	setImage(name) {
