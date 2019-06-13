@@ -14,17 +14,20 @@ export class MyCounterController {
 		} catch (e) {
 			console.error(e);
 		}
+
 	}
 
 	init() {
-		this.model.start();
-
-		this.view.body.addEventListener('mousemove', (e) => { 
+		const any = () =>  { 
 			this.setImage(this.imagesModel.failedButtonimage);
 			this.view.setupText("fail");
 			this.view.showRetry();
 			this.model.stop();
-	 	}, false);	
+		};
+
+		this.model.start();
+
+		this.view.body.addEventListener('mousemove', any, false);	
 
 		this.model.counterEvent.addEventListener("changeValue", (e) => { 
 				this.setImage(this.imagesModel.getImage(e.detail.tickNumber));
@@ -32,23 +35,17 @@ export class MyCounterController {
 		});
 
 		this.model.counterEvent.addEventListener("end", () => {
-			console.log("success");
-			this.view.body.removeEventListener('mousemove', (e) => { 
-				this.setImage(this.imagesModel.failedButtonimage);
-				this.view.setupText("fail");
-				this.view.showRetry();
-				this.model.stop();
-			}, false);
+			this.view.body.removeEventListener('mousemove', any, false);
 			this.setImage(this.imagesModel.successButtonimage);
 			this.view.setupText("success");
 			this.view.showRetry();
 			this.model.stop();
-		})
+		});
 
 	}
 
 	setImage(name) {
-		return this.view.setupImage(name);		
+		this.view.setupImage(name);		
 	}
 }
 
