@@ -15,3 +15,7 @@
 
   font-family: 'MyFont';
 }
+
+body {
+    margin: 1.4rem;
+}

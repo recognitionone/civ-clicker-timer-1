@@ -7,11 +7,12 @@ const port = process.env.PORT || 3003
 console.log(process.env.PORT);
 
 app.use(express.static('dist'));
+app.use(express.static('TimeChooser'));
 app.use('/assets', express.static('assets'));
 
 
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, './index.html'))) 
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, './TimeChooser/index.html'))) 
 //TODOdoczytać o http get, post, delete, put
 
 app.get('/:name', (req, res) => res.send("hello " + req.params.name))
