@@ -7,15 +7,12 @@
   </head>
   <body>
     <button id="startButton">Start timer</button>
-
     <div>
-      <input type="range" id="timeChooser" name="sec"
-             min="5" max="60">
-      <label for="sec">sec</label>
+      <input type="range" id="slider" name="sec"
+             min="5" max="120">
+      <label id="timeValue">5</label>
+      <label for="sec">seconds</label>
     </div>
-    <!-- TODO -->
-    <p id="timeValue">show the value</p>
-    
     <script type="text/javascript" src="./bundle.js"></script>
   </body>
 </html>

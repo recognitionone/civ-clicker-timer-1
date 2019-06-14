@@ -9,6 +9,9 @@ export class TimeChooserController {
 	}
 
 	init() {
-		this.view.addStartHandler(() => { this.model.save(this.view.timeChooser.value) });
+		this.view.addSliderHandler(() => { 
+			this.model.save(this.view.slider.value);
+			this.view.setupText(this.view.slider.value);
+			 });
 	}
 }
