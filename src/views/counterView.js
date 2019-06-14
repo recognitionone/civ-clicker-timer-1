@@ -1,4 +1,4 @@
-export class MyCounterView {
+export class CounterView {
 	constructor() {
 		this.demo = document.getElementById("demo");
 		this.startButton = document.getElementById("startButton");

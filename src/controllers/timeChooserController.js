@@ -1,5 +1,5 @@
-import { TimeChooserModel } from './timeChooserModel.js';
-import { TimeChooserView } from './timeChooserView.js';
+import { TimeChooserModel } from '../models/timeChooserModel.js';
+import { TimeChooserView }  from '../views/timeChooserView.js';
 
 
 export class TimeChooserController {

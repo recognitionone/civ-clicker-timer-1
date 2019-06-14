@@ -1,6 +1,6 @@
 import '../styles/style.css';
-// import { MyCounterController } from './controller.js';
-import { TimeChooserController } from './timeChooserController.js';
+// import { MyCounterController } from './controllers/counterController.js';
+import { TimeChooserController } from './controllers/timeChooserController.js';
 
 // const counterCtr = new MyCounterController();
 // counterCtr.init();

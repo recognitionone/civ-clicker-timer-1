@@ -1,9 +1,9 @@
-import { MyCounterModel } from './model.js';
-import { MyCounterView } from './view.js';
-import { ImagesModel } from './imagesModel.js';
-import { imagesMock } from "../mock/imagesMock.js";
+import { CounterModel } from '../models/model.js';
+import { ImagesModel }  from '../models/imagesModel.js';
+import { CounterView }  from '../views/view.js';
+import { imagesMock }   from "../mock/imagesMock.js";
 
-export class MyCounterController {
+export class CounterController {
 	constructor() {
 		this.view = new MyCounterView();
 		this.model = new MyCounterModel(17, 0);

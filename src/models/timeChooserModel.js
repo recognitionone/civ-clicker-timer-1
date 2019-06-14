@@ -5,6 +5,5 @@ export class TimeChooserModel {
 
 	save(value) {
 		this.value = value;
-		console.log(value);
 	}
 }
