@@ -5,10 +5,6 @@ export class TimeChooserView {
 		this.timeValue = document.getElementById("timeValue");
 	}
 
-	// addStartHandler(startHandler) {
-	// 	this.startButton.onclick = startHandler;
-	// }
-
 	addSliderHandler(sliderHandler) {
 		this.slider.oninput = sliderHandler;
 	}
@@ -16,11 +12,5 @@ export class TimeChooserView {
 	setupText(value) {
 		this.timeValue.innerHTML = value;
 	}
-
-	// this.timeChooser.oninput = function() {
-	//   timeValue.innerHTML = this.value;
-	// }
-
-	//TODO: finish
 }
 
