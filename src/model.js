@@ -1,13 +1,4 @@
 export class MyCounterModel {
-
-	// interface Counter {
-	// 	initialValue: number;
-	// 	stopValue: number;
-	// 	currentValue: number;
-	// 	counterEvent: EventTarget;	
-	// 	start();
-	// 	stop();
-	// }
 	
 	constructor(initialValue, stopValue) {
 		this.initialValue = initialValue;

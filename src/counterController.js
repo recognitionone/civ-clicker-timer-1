@@ -9,18 +9,17 @@ export class MyCounterController {
 	constructor() {
 		this.view = new MyCounterView();
 		this.model = new MyCounterModel(3, 0);
-		this.imagesService = new ImagesService();
+	}
+
+	async init() {
+		const imagesData = await ImagesService.getImages('simple');
 
 		try {
-			this.imagesModel = new ImagesModel(JSON.stringify(imagesMock),
-				 this.model.initialValue - this.model.stopValue );
+			this.imagesModel = new ImagesModel(imagesData, this.model.initialValue - this.model.stopValue);
 		} catch (e) {
 			console.error(e);
 		}
 
-	}
-
-	init() {
 		const any = () =>  { 
 			this.setImage(this.imagesModel.failedButtonimage);
 			this.view.setupText("fail");
@@ -50,9 +49,6 @@ export class MyCounterController {
 
 			this.model.stop();
 		});
-
-
-		this.imagesService.getImages();
 	}
 
 	setImage(name) {

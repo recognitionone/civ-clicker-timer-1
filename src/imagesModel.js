@@ -1,13 +1,7 @@
-import { JsonValidator } from "../common/json"
+import { ImagesService } from './imagesService';
 
 export class ImagesModel {
 	constructor(imagesData, timeLength) {
-
-		if (!JsonValidator.isValidJson(imagesData)) { 
-			throw new Error("imagesData is not a valid json"); 
-		}
-
-		imagesData = JSON.parse(imagesData);
 
 		if (!imagesData.beforeButtonimage) {
 			throw new Error ("can't find beforeButtonimage property");
