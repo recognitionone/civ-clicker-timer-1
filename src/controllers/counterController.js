@@ -1,6 +1,6 @@
-import { CounterModel } from '../models/model.js';
+import { CounterModel } from '../models/counterModel.js';
 import { ImagesModel }  from '../models/imagesModel.js';
-import { CounterView }  from '../views/view.js';
+import { CounterView }  from '../views/counterView.js';
 import { imagesMock }   from "../mock/imagesMock.js";
 
 export class CounterController {
