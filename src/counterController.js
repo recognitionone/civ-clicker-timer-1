@@ -13,6 +13,7 @@ export class MyCounterController {
 
 	async init() {
 		const imagesData = await ImagesService.getImages('simple');
+		//obsłużenie wyjątku jeśli nie ma tego adresu
 
 		try {
 			this.imagesModel = new ImagesModel(imagesData, this.model.initialValue - this.model.stopValue);
@@ -20,7 +21,7 @@ export class MyCounterController {
 			console.error(e);
 		}
 
-		const any = () =>  { 
+		const endEvent = () =>  { 
 			this.setImage(this.imagesModel.failedButtonimage);
 			this.view.setupText("fail");
 			if(this.view.isRetryOn === false){
@@ -31,7 +32,7 @@ export class MyCounterController {
 
 		this.model.start();
 
-		this.view.body.addEventListener('mousemove', any, false);	
+		this.view.body.addEventListener('mousemove', endEvent, false);	
 
 		this.model.counterEvent.addEventListener("changeValue", (e) => { 
 				this.setImage(this.imagesModel.getImage(e.detail.tickNumber));
@@ -39,7 +40,7 @@ export class MyCounterController {
 		});
 
 		this.model.counterEvent.addEventListener("end", () => {
-			this.view.body.removeEventListener('mousemove', any, false);
+			this.view.body.removeEventListener('mousemove', endEvent, false);
 			this.setImage(this.imagesModel.successButtonimage);
 			this.view.setupText("success");
 			
