@@ -1,12 +1,15 @@
-import { MyCounterModel } from './model.js';
-import { MyCounterView } from './view.js';
-import { ImagesModel } from './imagesModel.js';
-import { imagesMock } from "../mock/imagesMock.js";
+import { MyCounterModel } from './model';
+import { MyCounterView } from './view';
+import { ImagesModel } from './imagesModel';
+
+import { ImagesService } from './imagesService';
+import { imagesMock } from '../mock/imagesMock';
 
 export class MyCounterController {
 	constructor() {
 		this.view = new MyCounterView();
-		this.model = new MyCounterModel(17, 0);
+		this.model = new MyCounterModel(3, 0);
+		this.imagesService = new ImagesService();
 
 		try {
 			this.imagesModel = new ImagesModel(JSON.stringify(imagesMock),
@@ -14,35 +17,49 @@ export class MyCounterController {
 		} catch (e) {
 			console.error(e);
 		}
+
 	}
 
 	init() {
-		this.setImage(this.imagesModel.beforeButtonimage);
-		this.view.addStartHandler(() => { this.model.start() });
-		this.view.addPauseHandler(() => { this.model.pause() });
-		this.view.addFailHandler(() => { this.model.fail() });
+		const endEvent = () =>  { 
+			this.setImage(this.imagesModel.failedButtonimage);
+			this.view.setupText("fail");
+			if(this.view.isRetryOn === false){
+				this.view.createRetry("It was close. Try again")
+			}
+			this.model.stop();
+		};
 
-		this.view.body.addEventListener('mousemove', e => { this.model.fail() });
+		this.model.start();
+
+		this.view.body.addEventListener('mousemove', endEvent, false);	
 
 		this.model.counterEvent.addEventListener("changeValue", (e) => { 
 				this.setImage(this.imagesModel.getImage(e.detail.tickNumber));
 				this.view.setupText(e.detail.counterValue);
 		});
 
-		this.addChangeListener("success", "success", this.imagesModel.successButtonimage);
-		this.addChangeListener("fail", "fail", this.imagesModel.failedButtonimage);
+		this.model.counterEvent.addEventListener("end", () => {
+			this.view.body.removeEventListener('mousemove', endEvent, false);
+			this.setImage(this.imagesModel.successButtonimage);
+			this.view.setupText("success");
+			
+			if(this.view.isRetryOn === false){
+				this.view.createRetry("Congratulations! Try another round");
+			}
+
+			this.model.stop();
+		});
+
+
+		this.imagesService.getImages();
 	}
 
 	setImage(name) {
-		return this.view.setupImage(name);		
+		this.view.setupImage(name);		
 	}
 
-	addChangeListener(eventName, textValue, imageValue) {
-		this.model.counterEvent.addEventListener(eventName, () => { 
-				this.setImage(imageValue);
-				this.view.setupText(textValue);
-		})		
-	}
+
 }
 
 

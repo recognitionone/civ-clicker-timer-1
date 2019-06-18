@@ -1,32 +1,25 @@
 export class MyCounterView {
 	constructor() {
-		this.demo = document.getElementById("demo");
-		this.startButton = document.getElementById("startButton");
-		this.pauseButton = document.getElementById("pauseButton");
-		this.resetButton = document.getElementById("resetButton");
-
+		this.counterDisplay = document.getElementById("demo");
 		this.image = document.getElementById("image");
 		this.body = document.body;
-	}
-
-	addStartHandler(startHandler) {
-		this.startButton.onclick = startHandler;
-	}
-
-	addPauseHandler(pauseHandler) {
-		this.pauseButton.onclick = pauseHandler;
-	}
-
-	addFailHandler(resetHandler) {
-		this.resetButton.onclick = resetHandler;
+		this.isRetryOn = false;
 	}
 
 	setupText(text) {
-		this.demo.innerHTML = text;
+		this.counterDisplay.innerHTML = text;
 	}
 
 	setupImage(imageName) {
 		this.image.src = imageName;
 	}
 
+	createRetry(value) {
+	    const retry = document.createElement("A");
+	    const text = document.createTextNode(value);
+	    retry.appendChild(text);
+	    retry.setAttribute('href','#');
+	    this.body.appendChild(retry);
+	    this.isRetryOn = true;
+	}
 }
