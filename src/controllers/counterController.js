@@ -1,14 +1,14 @@
-import { MyCounterModel } from './model';
-import { MyCounterView } from './view';
-import { ImagesModel } from './imagesModel';
+import { CounterModel } from '../models/counterModel.js';
+import { ImagesModel }  from '../models/imagesModel.js';
+import { CounterView }  from '../views/counterView.js';
+import { imagesMock }   from "../../mock/imagesMock.js";
+import { ImagesService } from '../imagesService';
 
-import { ImagesService } from './imagesService';
-import { imagesMock } from '../mock/imagesMock';
 
-export class MyCounterController {
+export class CounterController {
 	constructor() {
-		this.view = new MyCounterView();
-		this.model = new MyCounterModel(3, 0);
+		this.view = new CounterView();
+		this.model = new CounterModel(3, 0);
 	}
 
 	async init() {
@@ -57,5 +57,6 @@ export class MyCounterController {
 
 
 }
+
 
 

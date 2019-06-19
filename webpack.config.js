@@ -3,13 +3,14 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: './src/index.js'
+		app: './src/index.js',
+		counter: './src/counter.js'
 	},
 	plugins: [
 		new CleanWebpackPlugin()
 	],
 	output: {
-		filename: 'bundle.js',
+		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	},
 	module: {

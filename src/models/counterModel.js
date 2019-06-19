@@ -1,5 +1,5 @@
-export class MyCounterModel {
-	
+export class CounterModel {
+
 	constructor(initialValue, stopValue) {
 		this.initialValue = initialValue;
 		this.currentValue = initialValue;

@@ -1,5 +1,3 @@
-import { ImagesService } from './imagesService';
-
 export class ImagesModel {
 	constructor(imagesData, timeLength) {
 
