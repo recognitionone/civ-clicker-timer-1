@@ -2,25 +2,24 @@ import { CounterModel } from '../models/counterModel.js';
 import { ImagesModel }  from '../models/imagesModel.js';
 import { CounterView }  from '../views/counterView.js';
 import { imagesMock }   from "../../mock/imagesMock.js";
-
 import { ImagesService } from '../imagesService';
+
 
 export class CounterController {
 	constructor() {
 		this.view = new CounterView();
 		this.model = new CounterModel(3, 0);
-		this.imagesService = new ImagesService();
+	}
+
+	async init() {
+		const imagesData = await ImagesService.getImages('simple');
 
 		try {
-			this.imagesModel = new ImagesModel(JSON.stringify(imagesMock),
-				 this.model.initialValue - this.model.stopValue );
+			this.imagesModel = new ImagesModel(imagesData, this.model.initialValue - this.model.stopValue);
 		} catch (e) {
 			console.error(e);
 		}
 
-	}
-
-	init() {
 		const endEvent = () =>  { 
 			this.setImage(this.imagesModel.failedButtonimage);
 			this.view.setupText("fail");
@@ -50,9 +49,6 @@ export class CounterController {
 
 			this.model.stop();
 		});
-
-
-		this.imagesService.getImages();
 	}
 
 	setImage(name) {
@@ -61,5 +57,6 @@ export class CounterController {
 
 
 }
+
 
 
