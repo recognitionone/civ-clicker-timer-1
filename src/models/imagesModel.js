@@ -1,4 +1,4 @@
-import { JsonValidator } from "../common/json"
+import { JsonValidator } from "../../common/json"
 
 export class ImagesModel {
 	constructor(imagesData, timeLength) {
