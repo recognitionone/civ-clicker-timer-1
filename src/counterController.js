@@ -13,7 +13,6 @@ export class MyCounterController {
 
 	async init() {
 		const imagesData = await ImagesService.getImages('simple');
-		//obsłużenie wyjątku jeśli nie ma tego adresu
 
 		try {
 			this.imagesModel = new ImagesModel(imagesData, this.model.initialValue - this.model.stopValue);
