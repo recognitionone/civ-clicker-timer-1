@@ -12,5 +12,12 @@ export class TimeChooserView {
 	setupText(value) {
 		this.timeValue.innerHTML = value;
 	}
+
+	addStartButtonHandler(startHandler) {
+		this.startButton.onclick = startHandler;
+	}
+
+
 }
+
 

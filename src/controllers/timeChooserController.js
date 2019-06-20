@@ -13,5 +13,9 @@ export class TimeChooserController {
 			this.model.save(this.view.slider.value);
 			this.view.setupText(this.view.slider.value);
 			 });
+
+		this.view.addStartButtonHandler(() => {
+		 	window.location.href='counter?time='+this.model.value;
+		});
 	}
 }
