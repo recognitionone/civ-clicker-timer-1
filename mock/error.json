@@ -1,0 +1,9 @@
+{
+	"beforeButtonimage":  "./assets/error.png",
+	"successButtonimage": "./assets/error.png",
+	"failedButtonimage":  "./assets/error.png",
+	"timeLaps" : [
+			   "./assets/error.png"
+	],
+	"isError": true
+}

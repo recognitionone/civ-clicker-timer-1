@@ -34,7 +34,7 @@ export class CounterModel {
 	}
 
 	endEvent() {
-		this.counterEvent.dispatchEvent(new Event("end"));
+		return this.counterEvent.dispatchEvent(new Event("end"));
 	}
 
 }

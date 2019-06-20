@@ -20,25 +20,25 @@ export class CounterController {
 			console.error(e);
 		}
 
-		const endEvent = () =>  { 
-			this.setImage(this.imagesModel.failedButtonimage);
+		await this.setImage(this.imagesModel.beforeButtonimage);
+		this.model.start();
+
+		const endEvent = () =>  {
 			this.view.setupText("fail");
 			if(this.view.isRetryOn === false){
 				this.view.createRetry("It was close. Try again")
 			}
 			this.model.stop();
+			this.setImage(this.imagesModel.failedButtonimage);			
 		};
 
-		this.model.start();
 
-		this.view.body.addEventListener('mousemove', endEvent, false);	
-
-		this.model.counterEvent.addEventListener("changeValue", (e) => { 
+		await this.model.counterEvent.addEventListener("changeValue", (e) => { 
 				this.setImage(this.imagesModel.getImage(e.detail.tickNumber));
 				this.view.setupText(e.detail.counterValue);
 		});
 
-		this.model.counterEvent.addEventListener("end", () => {
+		await this.model.counterEvent.addEventListener("end", () => {
 			this.view.body.removeEventListener('mousemove', endEvent, false);
 			this.setImage(this.imagesModel.successButtonimage);
 			this.view.setupText("success");
@@ -49,6 +49,17 @@ export class CounterController {
 
 			this.model.stop();
 		});
+
+		await this.view.body.addEventListener('mousemove', endEvent, false);
+
+		if (this.imagesModel.isError) {
+			this.view.setupText("error");
+			this.model.stop();
+			this.view.body.removeEventListener('mousemove', endEvent, false);
+
+		}
+
+		
 	}
 
 	setImage(name) {
