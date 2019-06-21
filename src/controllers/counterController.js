@@ -7,11 +7,35 @@ import { ImagesService } from '../imagesService';
 
 export class CounterController {
 	constructor() {
+
+		function getCookie(cname) {
+		  var name = cname + "=";
+		  var ca = document.cookie.split(';');
+		  for(var i = 0; i < ca.length; i++) {
+		    var c = ca[i];
+		    while (c.charAt(0) == ' ') {
+		      c = c.substring(1);
+		    }
+		    if (c.indexOf(name) == 0) {
+		      return c.substring(name.length, c.length);
+		    }
+		  }
+		  return "";
+		}
+		let time = null;
+		this.time = getCookie("time");
+
 		this.view = new CounterView();
-		this.model = new CounterModel(3, 0);
+		this.model = new CounterModel(this.time, 0);
 	}
 
 	async init() {
+
+
+		console.log(document.cookie);
+		
+
+
 		const imagesData = await ImagesService.getImages('simple');
 
 		try {
@@ -54,6 +78,8 @@ export class CounterController {
 	setImage(name) {
 		this.view.setupImage(name);		
 	}
+
+	
 
 
 }
