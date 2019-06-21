@@ -12,6 +12,11 @@ export class TimeChooserController {
 		this.view.addSliderHandler(() => { 
 			this.model.save(this.view.slider.value);
 			this.view.setupText(this.view.slider.value);
-			 });
+			localStorage.setItem('time', `${this.view.slider.value}`);
+			});
+
+		this.view.addStartButtonHandler(() => {
+			window.location = ('/counter')
+		});
 	}
 }

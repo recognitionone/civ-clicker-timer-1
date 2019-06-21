@@ -7,11 +7,15 @@ import { ImagesService } from '../imagesService';
 
 export class CounterController {
 	constructor() {
+		let time = null; 
+		this.time = localStorage.getItem('time');
 		this.view = new CounterView();
-		this.model = new CounterModel(3, 0);
+		this.model = new CounterModel(this.time, 0);
 	}
 
 	async init() {
+		
+
 		const imagesData = await ImagesService.getImages('simple');
 
 		try {
