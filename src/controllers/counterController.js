@@ -7,11 +7,22 @@ import { ImagesService } from '../imagesService';
 
 export class CounterController {
 	constructor() {
+		this.timeScale = null;
+		const searchParams = new URLSearchParams(window.location.search);
+
+		for(var pair of searchParams.entries()) {
+		   console.log(pair[0]+ ', '+ pair[1]);
+		   this.timeScale = Number(pair[1]); 
+		}
+
+
+
 		this.view = new CounterView();
-		this.model = new CounterModel(3, 0);
+		this.model = new CounterModel(this.timeScale, 0);
 	}
 
 	async init() {
+
 		const imagesData = await ImagesService.getImages('simple');
 
 		try {
